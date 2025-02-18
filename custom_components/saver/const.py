@@ -1,5 +1,5 @@
 import homeassistant.helpers.config_validation as cv
-from homeassistant.const import CONF_ENTITY_ID, CONF_NAME
+from homeassistant.const import CONF_ENTITY_ID, CONF_NAME, CONF_VARIABLES
 
 import voluptuous as vol
 
@@ -53,3 +53,6 @@ SERVICE_SET_VARIABLE_SCHEMA = vol.Schema({
     vol.Required(CONF_NAME): cv.string,
     vol.Required(CONF_VALUE): cv.string
 })
+
+SERVICE_SET_VARIABLES = 'set_variables'
+SERVICE_SET_VARIABLES_SCHEMA = cv.SCRIPT_VARIABLES_SCHEMA

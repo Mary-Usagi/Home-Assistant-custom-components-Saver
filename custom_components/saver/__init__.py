@@ -155,6 +155,14 @@ def setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
         saver_entity.set_variable(name, value)
         hass.bus.fire('event_saver_saved_variable', {'variable': name, 'value': value})
 
+    def set_variables(call) -> None:
+        data = call.data
+        variables = data[CONF_VARIABLES]
+
+        for key, value in variables.items():
+            saver_entity.set_variable(key, value)
+            hass.bus.fire('event_saver_saved_variable', {'variable': key, 'value': value})
+
     hass.services.register(DOMAIN, SERVICE_CLEAR, clear, SERVICE_CLEAR_SCHEMA)
     hass.services.register(DOMAIN, SERVICE_DELETE, delete, SERVICE_DELETE_SCHEMA)
     hass.services.register(DOMAIN, SERVICE_DELETE_VARIABLE, delete_variable, SERVICE_DELETE_VARIABLE_SCHEMA)
@@ -162,6 +170,7 @@ def setup_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
     hass.services.register(DOMAIN, SERVICE_RESTORE_STATE, restore_state, SERVICE_RESTORE_STATE_SCHEMA)
     hass.services.register(DOMAIN, SERVICE_SAVE_STATE, save_state, SERVICE_SAVE_STATE_SCHEMA)
     hass.services.register(DOMAIN, SERVICE_SET_VARIABLE, set_variable, SERVICE_SET_VARIABLE_SCHEMA)
+    hass.services.register(DOMAIN, SERVICE_SET_VARIABLES, set_variables, SERVICE_SET_VARIABLES_SCHEMA)
 
     return True
 

@@ -60,6 +60,22 @@ set_variable:
       selector:
         text:
 
+# TODO: add optional prefix field
+set_variables:
+  name: Set variables
+  description: >
+    Sets the value and content of multiple variables.
+  fields:
+    name:
+      name: Variables
+      description: Name and value of the variables to save.
+      example: "counter: 3"
+      required: true
+      selector:
+        object:
+
+# TODO: add service to delete / reset all variables with given prefix 
+
 save_state:
   name: Save state
   description: >
